@@ -2,5 +2,20 @@
     <string name="app_name" translatable="false">First</string>
     <string name="text1" translatable="false">すべて終了しました</string>
     <string name="text2" translatable="false">赵梵宇</string>
+
     <string name="switch1" translatable="false">233333333</string>
+
+
+    <string name="tname" translatable="false" textcolor="666600">TeamA</string>
+    <string name="tsc" translatable="false" textcolor="663300">0</string>
+
+    <string name="j3" translatable="false">+3 POINTS</string>
+    <string name="j2" translatable="false">+2 POINTS</string>
+    <string name="j1" translatable="false">+1 POINTS</string>
+    <string name="clear" translatable="false">RESET</string>
+
+
+    <string name="but1" translatable="false">转换为华氏温度</string>
+    <string name="inp1" translatable="false">输入摄氏温度</string>
+    <string name="text3" translatable="false">结果为：</string>
 </resources>
