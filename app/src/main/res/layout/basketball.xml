@@ -8,53 +8,62 @@
     <TextView
         android:id="@+id/tname"
         android:text="@string/tname"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:gravity="center"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="40dp" />
 
     <TextView
         android:id="@+id/tsc"
         android:text="@string/tsc"
-        android:textSize="80dp"
+        android:textSize="70dp"
         android:gravity="center"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="90dp" />
 
 
     <Button
         android:id="@+id/j3"
         android:text="@string/j3"
-        android:textSize="27dp"
+        android:textSize="24dp"
         android:layout_width="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_height="60dp" />
+        android:layout_marginBottom="20dp"
+        android:layout_height="50dp" />
 
     <Button
         android:id="@+id/j2"
         android:text="@string/j2"
-        android:textSize="27dp"
+        android:textSize="24dp"
         android:layout_width="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_height="60dp" />
+        android:layout_marginBottom="20dp"
+        android:layout_height="50dp" />
 
     <Button
         android:id="@+id/j1"
         android:text="@string/j1"
-        android:textSize="27dp"
+        android:textSize="24dp"
         android:layout_width="match_parent"
-        android:layout_marginBottom="80dp"
-        android:layout_height="60dp" />
+        android:layout_marginBottom="40dp"
+        android:layout_height="50dp" />
 
     <Button
         android:id="@+id/clear"
         android:text="@string/clear"
-        android:textSize="27dp"
+        android:textSize="25dp"
         android:layout_width="120dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="80dp"
-        android:layout_height="60dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_height="50dp" />
+
+
+    <Button
+        android:id="@+id/btos"
+        android:text="@string/stob"
+        android:textSize="13dp"
+        android:layout_gravity="end"
+        android:layout_width="80dp"
+        android:layout_height="40dp" />
 
 </LinearLayout>

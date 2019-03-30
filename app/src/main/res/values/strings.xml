@@ -13,6 +13,7 @@
     <string name="j2" translatable="false">+2 POINTS</string>
     <string name="j1" translatable="false">+1 POINTS</string>
     <string name="clear" translatable="false">RESET</string>
+    <string name="stob" translatable="false">切换页面</string>
 
 
     <string name="but1" translatable="false">转换为华氏温度</string>
