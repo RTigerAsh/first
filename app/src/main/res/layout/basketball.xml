@@ -1,69 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/tname"
-        android:text="@string/tname"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
-
-    <TextView
-        android:id="@+id/tsc"
-        android:text="@string/tsc"
-        android:textSize="70dp"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="90dp" />
-
-
-    <Button
-        android:id="@+id/j3"
-        android:text="@string/j3"
-        android:textSize="24dp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_height="50dp" />
-
-    <Button
-        android:id="@+id/j2"
-        android:text="@string/j2"
-        android:textSize="24dp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_height="50dp" />
-
-    <Button
-        android:id="@+id/j1"
-        android:text="@string/j1"
-        android:textSize="24dp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="40dp"
-        android:layout_height="50dp" />
-
-    <Button
-        android:id="@+id/clear"
-        android:text="@string/clear"
-        android:textSize="25dp"
-        android:layout_width="120dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_height="50dp" />
-
+    android:paddingTop="32dp"
+    android:layout_height="match_parent"
+    tools:context="cn.edu.swufe.first.basketball">
 
     <Button
         android:id="@+id/btos"
-        android:text="@string/stob"
-        android:textSize="13dp"
-        android:layout_gravity="end"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
         android:layout_width="80dp"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:text="@string/stob"
+        android:textSize="13dp" />
 
-</LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tnam"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/tname"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/tsc"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/tsc"
+                android:textSize="70dp" />
+
+
+            <Button
+                android:id="@+id/j3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/j3"
+                android:textSize="24dp" />
+
+            <Button
+                android:id="@+id/j2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/j2"
+                android:textSize="24dp" />
+
+            <Button
+                android:id="@+id/j1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/j1"
+                android:textSize="24dp" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:background="@color/colorPrimary"
+            android:layout_width="2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_height="match_parent" />
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tnameb"
+                android:text="@string/tnameb"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/tscb"
+                android:text="@string/tscb"
+                android:textSize="70dp"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="90dp" />
+
+
+            <Button
+                android:id="@+id/j3b"
+                android:text="@string/j3b"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="50dp" />
+
+            <Button
+                android:id="@+id/j2b"
+                android:text="@string/j2b"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="50dp" />
+
+            <Button
+                android:id="@+id/j1b"
+                android:text="@string/j1b"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="50dp" />
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:text="@string/clear"
+        android:textSize="25dp" />
+
+
+</RelativeLayout>

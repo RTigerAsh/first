@@ -6,17 +6,29 @@
     <string name="switch1" translatable="false">233333333</string>
 
 
-    <string name="tname" translatable="false" textcolor="666600">TeamA</string>
-    <string name="tsc" translatable="false" textcolor="663300">0</string>
+    <string name="tname" textcolor="666600" translatable="false">TeamA</string>
+    <string name="tsc" textcolor="663300" translatable="false">0</string>
+    <string name="tnameb" textcolor="666600" translatable="false">TeamB</string>
+    <string name="tscb" textcolor="663300" translatable="false">0</string>
 
     <string name="j3" translatable="false">+3 POINTS</string>
     <string name="j2" translatable="false">+2 POINTS</string>
     <string name="j1" translatable="false">+1 POINTS</string>
     <string name="clear" translatable="false">RESET</string>
     <string name="stob" translatable="false">切换页面</string>
+    <string name="j3b" translatable="false">+3 POINTS</string>
+    <string name="j2b" translatable="false">+2 POINTS</string>
+    <string name="j1b" translatable="false">+1 POINTS</string>
 
 
     <string name="but1" translatable="false">转换为华氏温度</string>
     <string name="inp1" translatable="false">输入摄氏温度</string>
     <string name="text3" translatable="false">结果为：</string>
+
+
+    <string name="rmb" translatable="false">INPUT RMB</string>
+    <string name="showrate" translatable="false"></string>
+    <string name="dollar" translatable="false">Dollar</string>
+    <string name="euro" translatable="false">Euro</string>
+    <string name="con" translatable="false">Con</string>
 </resources>
