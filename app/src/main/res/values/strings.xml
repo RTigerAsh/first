@@ -31,4 +31,5 @@
     <string name="dollar" translatable="false">Dollar</string>
     <string name="euro" translatable="false">Euro</string>
     <string name="con" translatable="false">Con</string>
+    <string name="hint_editmoney" translatable="false">修改汇率</string>
 </resources>
