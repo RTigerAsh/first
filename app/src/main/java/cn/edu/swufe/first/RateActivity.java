@@ -14,9 +14,9 @@ public class RateActivity extends AppCompatActivity {
 
         EditText rmb;
         TextView showrate;
-        Double dorate,eurate,corate;
-
-
+        double dorate=7.0;
+        double eurate=11.0;
+        double corate=500.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +24,19 @@ public class RateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rate);
 
-        /*Intent intent=getIntent();
+        Intent intent=getIntent();
         dorate=intent.getDoubleExtra("dorate",7.0);
         eurate=intent.getDoubleExtra("eurate",11.0);
-        corate=intent.getDoubleExtra("corate",500.0);*/
+        corate=intent.getDoubleExtra("corate",500.0);
 
-        Bundle bundle=this.getIntent().getExtras();
+        /*Bundle bundle=this.getIntent().getExtras();
         dorate=bundle.getDouble("dorate");
         eurate=bundle.getDouble("eurate");
-        corate=bundle.getDouble("corate");
+        corate=bundle.getDouble("corate");*/
 
-        Log.i("RateActivity", "dollar rate change finished--->"+dorate);
-        Log.i("RateActivity", "euro rate change finished--->"+eurate);
-        Log.i("RateActivity", "con rate change finished--->"+corate);
+        Log.i("RateActivity  onCreat", "dollar rate --->"+dorate);
+        Log.i("RateActivity  onCreat", "euro rate--->"+eurate);
+        Log.i("RateActivity  onCreat", "con rate--->"+corate);
 
         rmb=(EditText) findViewById(R.id.rmb);
         showrate=(TextView)findViewById(R.id.showrate);
@@ -106,11 +106,26 @@ public class RateActivity extends AppCompatActivity {
                     break;
                 case 4:
                     Intent intent =new Intent(RateActivity.this,ChangeRateActivity.class);
-                    startActivity(intent);//切换页面到修改汇率
+                    startActivityForResult(intent,1);//切换页面到修改汇率
                     break;
-
-
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode==1&&resultCode==2){
+            Bundle bundle=data.getExtras();
+            dorate=bundle.getDouble("dorate",1.0);
+            eurate=bundle.getDouble("eurate",1.0);
+            corate=bundle.getDouble("corate",1.0);
+
+            Log.i("onActivityResult  ", "dollar rate --->"+dorate);
+            Log.i("onActivityResult  ", "euro rate--->"+eurate);
+            Log.i("onActivityResult  ", "con rate--->"+corate);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
