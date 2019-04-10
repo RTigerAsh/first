@@ -1,5 +1,6 @@
 package cn.edu.swufe.first;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +12,11 @@ import android.widget.Toast;
 
 public class RateActivity extends AppCompatActivity {
 
-        EditText rmb,edit_dollar,edit_euro,edit_con;
+        EditText rmb;
         TextView showrate;
+        Double dorate,eurate,corate;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +24,27 @@ public class RateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rate);
 
+        /*Intent intent=getIntent();
+        dorate=intent.getDoubleExtra("dorate",7.0);
+        eurate=intent.getDoubleExtra("eurate",11.0);
+        corate=intent.getDoubleExtra("corate",500.0);*/
+
+        Bundle bundle=this.getIntent().getExtras();
+        dorate=bundle.getDouble("dorate");
+        eurate=bundle.getDouble("eurate");
+        corate=bundle.getDouble("corate");
+
+        Log.i("RateActivity", "dollar rate change finished--->"+dorate);
+        Log.i("RateActivity", "euro rate change finished--->"+eurate);
+        Log.i("RateActivity", "con rate change finished--->"+corate);
+
         rmb=(EditText) findViewById(R.id.rmb);
-        edit_dollar=(EditText)findViewById(R.id.edit_dollar);
-        edit_euro=(EditText)findViewById(R.id.edit_euro);
-        edit_con=(EditText)findViewById(R.id.edit_con);
         showrate=(TextView)findViewById(R.id.showrate);
 
         Button dollar = findViewById(R.id.dollar);
         Button euro = findViewById(R.id.euro);
         Button con = findViewById(R.id.con);
+        Button changerate=findViewById(R.id.button_changerate);
 
         MyListener listener = new MyListener();
         dollar.setTag(1);
@@ -37,12 +53,8 @@ public class RateActivity extends AppCompatActivity {
         euro.setOnClickListener(listener);
         con.setTag(3);
         con.setOnClickListener(listener);
-        edit_dollar.setTag(4);
-        edit_dollar.setOnClickListener(listener);
-        edit_euro.setTag(5);
-        edit_euro.setOnClickListener(listener);
-        edit_con.setTag(6);
-        edit_con.setOnClickListener(listener);
+        changerate.setTag(4);
+        changerate.setOnClickListener(listener);
 
     }
 
@@ -53,13 +65,6 @@ public class RateActivity extends AppCompatActivity {
             int tag =(Integer)v.getTag();
 
             String str=rmb.getText().toString();
-            String strdo=edit_dollar.getText().toString();
-            String streu=edit_euro.getText().toString();
-            String strco=edit_con.getText().toString();
-
-            double dorate=1/6.7;
-            double eurate=1/11.0;
-            double corate=500;
 
             switch (tag){
 
@@ -100,29 +105,10 @@ public class RateActivity extends AppCompatActivity {
                     }
                     break;
                 case 4:
-                    if (strdo.length()>0){
-                        Double edit_dollar= Double.parseDouble(strdo);
-                        dorate=edit_dollar;
-                        Toast.makeText(RateActivity.this,"汇率已修改",Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(RateActivity.this,"汇率未修改",Toast.LENGTH_SHORT).show();
-                    }
-                case 5:
-                    if (streu.length()>0){
-                        Double edit_dollar= Double.parseDouble(strdo);
-                        dorate=edit_dollar;
-                        Toast.makeText(RateActivity.this,"汇率已修改",Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(RateActivity.this,"汇率未修改",Toast.LENGTH_SHORT).show();
-                    }
-                case 6:
-                    if (strco.length()>0){
-                        Double edit_dollar= Double.parseDouble(strdo);
-                        dorate=edit_dollar;
-                        Toast.makeText(RateActivity.this,"汇率已修改",Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(RateActivity.this,"汇率未修改",Toast.LENGTH_SHORT).show();
-                    }
+                    Intent intent =new Intent(RateActivity.this,ChangeRateActivity.class);
+                    startActivity(intent);//切换页面到修改汇率
+                    break;
+
 
             }
         }

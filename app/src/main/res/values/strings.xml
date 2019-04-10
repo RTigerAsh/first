@@ -27,9 +27,13 @@
 
 
     <string name="rmb" translatable="false">INPUT RMB</string>
+    <string name="button_changerate" translatable="false">修改汇率</string>
+    <string name="button_returnrate" translatable="false">确认修改</string>
     <string name="showrate" translatable="false"></string>
     <string name="dollar" translatable="false">Dollar</string>
     <string name="euro" translatable="false">Euro</string>
     <string name="con" translatable="false">Con</string>
-    <string name="hint_editmoney" translatable="false">修改汇率</string>
+    <string name="hint_editdollar" translatable="false">修改美元汇率</string>
+    <string name="hint_editeuro" translatable="false">修改欧元汇率</string>
+    <string name="hint_editcon" translatable="false">修改韩元汇率</string>
 </resources>
