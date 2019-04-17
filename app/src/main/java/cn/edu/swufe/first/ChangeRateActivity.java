@@ -13,7 +13,7 @@ public class ChangeRateActivity extends AppCompatActivity {
 
     EditText edit_dollar,edit_euro,edit_con;
     Button button_returnrate;
-    public Double dorate=1.0,eurate=1.0,corate=1.0;
+    public Float dorate=1.0f,eurate=1.0f,corate=1.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,54 +45,45 @@ public class ChangeRateActivity extends AppCompatActivity {
             int tag =(Integer)v.getTag();
 
             String strdo=edit_dollar.getText().toString();
-            Log.i("ChangeRateActivity", "finished--->"+strdo);
-            if (strdo.length()>0)
-                dorate= Double.parseDouble(strdo);
-            else
-                Log.i("ChangeRateActivity", "dollar rate change filled--->"+dorate);
-            //dorate= Double.parseDouble(strdo);
-            //Log.i("ChangeRateActivity", "dollar rate change finished--->"+dorate);
             String streu=edit_euro.getText().toString();
-            if (streu.length()>0)
-                eurate= Double.parseDouble(streu);
-            else
-                Log.i("ChangeRateActivity", "streu rate change filled--->"+dorate);
             String strco=edit_con.getText().toString();
-            if (strco.length()>0)
-                corate= Double.parseDouble(strco);
-            else
-                Log.i("ChangeRateActivity", "dollar rate change filled--->"+dorate);
 
             switch (tag){
                 case 1:
                     if (strdo.length()>0){
-                        //dorate= Double.parseDouble(strdo);
-                        //Log.i("ChangeRateActivity", "finished--->"+strdo);
-                        Log.i("ChangeRateActivity", "dollar rate change finished--->"+dorate);
-                        //Toast.makeText(ChangeRateActivity.this,"汇率已修改",Toast.LENGTH_SHORT).show();
+                        Log.i("ChangeRateActivity", "case 1--dollar rate change finished--->"+dorate);
                     }else {
-                        Log.i("ChangeRateActivity", "dollar rate change filled--->"+dorate);
+                        Log.i("ChangeRateActivity", "case 1--dollar rate change filled--->"+dorate);
                     }
                     break;
                 case 2:
                     if (streu.length()>0){
-                        //eurate= Double.parseDouble(streu);
-                        Log.i("ChangeRateActivity", "euro rate change finished--->"+eurate);
-                        Toast.makeText(ChangeRateActivity.this,"汇率已修改",Toast.LENGTH_SHORT).show();
+                        Log.i("ChangeRateActivity", "case 2--euro rate change finished--->"+eurate);
                     }else {
-                        Log.i("ChangeRateActivity", "euro rate change filled--->"+dorate);
+                        Log.i("ChangeRateActivity", "case 2--euro rate change filled--->"+dorate);
                     }
                     break;
                 case 3:
                     if (strco.length()>0){
-                        //corate=Double.parseDouble(strco);
-                        Log.i("ChangeRateActivity", "con rate change finished--->"+corate);
-                        Toast.makeText(ChangeRateActivity.this,"汇率已修改", Toast.LENGTH_SHORT).show();
+                        Log.i("ChangeRateActivity", "case 3--con rate change finished--->"+corate);
                     }else {
-                        Log.i("ChangeRateActivity", "con rate change filled--->"+dorate);
+                        Log.i("ChangeRateActivity", "case 3--con rate change filled--->"+dorate);
                     }
                     break;
                 case 4:
+                    if (strdo.length()>0)
+                        dorate= Float.parseFloat(strdo);
+                    else
+                        Log.i("ChangeRateActivity", "case 4--dollar rate change filled--->"+dorate);
+                    if (streu.length()>0)
+                        eurate= Float.parseFloat(streu);
+                    else
+                        Log.i("ChangeRateActivity", "case 4--euro rate change filled--->"+eurate);
+                    if (strco.length()>0)
+                        corate= Float.parseFloat(strco);
+                    else
+                        Log.i("ChangeRateActivity", "case 4--con rate change filled--->"+corate);
+
                     Intent intent2 =new Intent(ChangeRateActivity.this,RateActivity.class);
 
                     /*intent2.putExtra("dorate",dorate);
@@ -100,11 +91,10 @@ public class ChangeRateActivity extends AppCompatActivity {
                     intent2.putExtra("corate",corate);*/
 
                    Bundle bdl=new Bundle();
-                   bdl.putDouble("dorate",dorate);
-                   bdl.putDouble("eurate",eurate);
-                   bdl.putDouble("dcorate",corate);
+                   bdl.putFloat("dorate",dorate);
+                   bdl.putFloat("eurate",eurate);
+                   bdl.putFloat("corate",corate);
                    intent2.putExtras(bdl);//传递参数（新汇率）
-
                     Log.i("ChangeRateActivity", "dollar rate change finished--->"+dorate);
                     Log.i("ChangeRateActivity", "euro rate change finished--->"+eurate);
                     Log.i("ChangeRateActivity", "con rate change finished--->"+corate);
