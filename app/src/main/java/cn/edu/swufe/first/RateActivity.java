@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +58,21 @@ public class RateActivity extends AppCompatActivity {
         changerate.setTag(4);
         changerate.setOnClickListener(listener);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.rate,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.changerate){
+            Intent intent =new Intent(RateActivity.this,ChangeRateActivity.class);
+            startActivityForResult(intent,1);//切换页面到修改汇率
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class MyListener implements View.OnClickListener {
