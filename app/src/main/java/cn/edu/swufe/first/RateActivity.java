@@ -3,10 +3,10 @@ package cn.edu.swufe.first;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,15 +16,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 
 public class RateActivity extends AppCompatActivity implements Runnable{
 
@@ -34,6 +34,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         float eurate=11.0f;
         float corate=500.0f;
         Handler handler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         dorate=intent.getFloatExtra("dorate",7.0f);
         eurate=intent.getFloatExtra("eurate",11.0f);
         corate=intent.getFloatExtra("corate",500.0f);
+
 
         /*Bundle bundle=this.getIntent().getExtras();
         dorate=bundle.getDouble("dorate");
@@ -91,8 +93,16 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what==1){
-                    String str=(String) msg.obj;
-                    Log.i("hangmessage : ","getMessage msg="+str);
+                    Bundle bdl=(Bundle) msg.obj;
+                    dorate=bdl.getFloat("dorate");
+                    eurate=bdl.getFloat("eurate");
+                    corate=bdl.getFloat("corate");
+
+                    Log.i("Get internet onCreat", "dollar rate --->"+dorate);
+                    Log.i("Get internet onCreat", "euro rate--->"+eurate);
+                    Log.i("Get internet onCreat", "con rate--->"+corate);
+
+                    Toast.makeText(RateActivity.this,"汇率已更新",Toast.LENGTH_SHORT).show();
                 }
                 super.handleMessage(msg);
             }
@@ -118,25 +128,23 @@ public class RateActivity extends AppCompatActivity implements Runnable{
     @Override
     public void run() {
         Log.i("RareActivity run ","子线程开始运行");
-        for (int i=1;i<6;i++){
+        for (int i=1;i<3;i++){
             Log.i("run test","-----i="+i);
             try {
-               Thread.sleep(2000);
+               Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
 
-        //获取Msg对象  用于返回主线程
-        Message msg=handler.obtainMessage();
-        msg.what=1;//设置信标
-        //Message msg=handler.obtainMessage(1);
-        msg.obj="this message from run()  what=1";
-        handler.sendMessage(msg);//放回msg堆栈中
+
+        //用于保存网络数据
+        Bundle bundle=new Bundle();
+
 
         //获取网络数据
-        URL rateurl= null;
+        /*URL rateurl= null;
         try {
             rateurl = new URL("http://www.usd-cny.com/icbc.htm");
             HttpURLConnection http = (HttpURLConnection) rateurl.openConnection();
@@ -145,11 +153,62 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             String html=inputStream2String(in);
             Log.i("run getintertmsg", "run: html="+html);
 
+            Document doc=Jsoup.parse(html);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }*/
+
+        Document doc = null;
+        try {
+            doc = Jsoup.connect("http://www.usd-cny.com/bankofchina.htm").get();
+            //doc=Jsoup.parse(html);
+            Log.i("Document activity", "run: "+doc.title());
+            Elements tables=doc.getElementsByTag("table");
+//            for(Element table : tables){
+//                Log.i("Document activity", "run: table["+i+"]="+table);
+//                i++;
+//            }
+
+            Element table2=tables.get(0);
+            Log.i("Document activity", "run: table2="+table2);
+
+            //获取<td>中的元素
+            Elements tds = table2.getElementsByTag("td");
+            for (int i =0;i<tds.size();i+=6){
+                Element td1 = tds.get(i);
+                Element td2 = tds.get(i+5);
+                //Log.i("Document activity", "run: ="+td1.text()+"--->"+td2.text());
+                String text=td1.text();
+                String val=td2.text();
+
+
+                if ("美元".equals(text)){
+                    bundle.putFloat("dorate",100f/Float.parseFloat(val));
+                } else if ("欧元".equals(text)){
+                    bundle.putFloat("eurate",100f/Float.parseFloat(val));
+                } else if ("韩元".equals(text)){
+                    bundle.putFloat("corate",100f/Float.parseFloat(val));
+                }
+            }
+            for (Element td:tds){
+                Log.i("Document activity", "run: td="+td);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        //获取Msg对象  用于返回主线程
+        Message msg=handler.obtainMessage();
+        msg.what=1;//--设置信标
+        //Message msg=handler.obtainMessage(1);
+        //msg.obj="this message from run()  what=1";
+        msg.obj=bundle;
+        handler.sendMessage(msg);//--放回msg堆栈中
+
 
 
     }
