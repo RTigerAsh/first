@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class RateActivity extends AppCompatActivity implements Runnable{
 
@@ -34,6 +37,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         float eurate=11.0f;
         float corate=500.0f;
         Handler handler;
+        private String updateDate="";
 
 
     @Override
@@ -80,14 +84,30 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         dorate=sharedPreferences.getFloat("dorate",7.0f);
         eurate=sharedPreferences.getFloat("eurate",11.0f);
         corate=sharedPreferences.getFloat("corate",500.0f);
+        updateDate=sharedPreferences.getString("update_data","");
+
+        //获取当前系统时间
+        Date today=Calendar.getInstance().getTime();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        final String todaystr=sdf.format(today);
 
         Log.i("spdate  onCreat", "dollar rate --->"+dorate);
         Log.i("spdate  onCreat", "euro rate--->"+eurate);
         Log.i("spdate  onCreat", "con rate--->"+corate);
+        Log.i("spdate  onCreat", "onCreate: 获取系统时间--->"+todaystr);
 
-        //开启子线程
-        Thread t=new Thread(this);
-        t.start();
+        //判断时间
+        if (!todaystr.equals(updateDate)) {
+            //开启子线程
+
+            Log.i("spdate  onCreat", "onCreate: 需要更新");
+            Thread t=new Thread(this);
+            t.start();
+        }else {
+            Log.i("spdate  onCreat", "onCreate: 不需要更新");
+        }
+
+
 
         handler=new Handler(){
             @Override
@@ -101,6 +121,15 @@ public class RateActivity extends AppCompatActivity implements Runnable{
                     Log.i("Get internet onCreat", "dollar rate --->"+dorate);
                     Log.i("Get internet onCreat", "euro rate--->"+eurate);
                     Log.i("Get internet onCreat", "con rate--->"+corate);
+
+                    //保存更新的日期
+                    SharedPreferences sharedPreferences=getSharedPreferences("myrate", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putFloat("dorate",dorate);
+                    editor.putFloat("eurate",eurate);
+                    editor.putFloat("corate",corate);
+                    editor.putString("update_data",todaystr);
+                    editor.commit();
 
                     Toast.makeText(RateActivity.this,"汇率已更新",Toast.LENGTH_SHORT).show();
                 }
@@ -130,6 +159,11 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         Log.i("RareActivity run ","子线程开始运行");
         for (int i=1;i<3;i++){
             Log.i("run test","-----i="+i);
+            while(i==2){
+                Log.i("run ","子线程开始获取数据");
+                i++;
+            }
+
             try {
                Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -137,34 +171,49 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             }
         }
 
-
-
         //用于保存网络数据
         Bundle bundle=new Bundle();
 
-
         //获取网络数据
-        /*URL rateurl= null;
-        try {
-            rateurl = new URL("http://www.usd-cny.com/icbc.htm");
-            HttpURLConnection http = (HttpURLConnection) rateurl.openConnection();
-            InputStream in =http.getInputStream();
+//        URL rateurl= null;
+//        try {
+//            rateurl = new URL("http://www.usd-cny.com/icbc.htm");
+//            HttpURLConnection http = (HttpURLConnection) rateurl.openConnection();
+//            InputStream in =http.getInputStream();
+//
+//            String html=inputStream2String(in);
+//            Log.i("run getintertmsg", "run: html="+html);
+//
+//            Document doc=Jsoup.parse(html);
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-            String html=inputStream2String(in);
-            Log.i("run getintertmsg", "run: html="+html);
+        bundle=getFromBOC();
 
-            Document doc=Jsoup.parse(html);
+        //获取Msg对象  用于返回主线程
+        Message msg=handler.obtainMessage();
+        msg.what=1;//--设置信标
+        //Message msg=handler.obtainMessage(1);
+        //msg.obj="this message from run()  what=1";
+        msg.obj=bundle;
+        handler.sendMessage(msg);//--放回msg堆栈中
+    }
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+    /**
+     * 从bankofchina中获取网络数据
+     * @return
+     */
 
+    private Bundle getFromBOC() {
+        Bundle bundle =new Bundle();
         Document doc = null;
         try {
             doc = Jsoup.connect("http://www.usd-cny.com/bankofchina.htm").get();
-            //doc=Jsoup.parse(html);
+//          doc=Jsoup.parse(html);
             Log.i("Document activity", "run: "+doc.title());
             Elements tables=doc.getElementsByTag("table");
 //            for(Element table : tables){
@@ -173,14 +222,14 @@ public class RateActivity extends AppCompatActivity implements Runnable{
 //            }
 
             Element table2=tables.get(0);
-            Log.i("Document activity", "run: table2="+table2);
+            Log.i("Document activity", "run: 从table2获取数据成功");
 
             //获取<td>中的元素
             Elements tds = table2.getElementsByTag("td");
             for (int i =0;i<tds.size();i+=6){
                 Element td1 = tds.get(i);
                 Element td2 = tds.get(i+5);
-                //Log.i("Document activity", "run: ="+td1.text()+"--->"+td2.text());
+                Log.i("Document activity", "run: "+td1.text()+"--->"+td2.text());
                 String text=td1.text();
                 String val=td2.text();
 
@@ -194,23 +243,13 @@ public class RateActivity extends AppCompatActivity implements Runnable{
                 }
             }
             for (Element td:tds){
-                Log.i("Document activity", "run: td="+td);
+                //Log.i("Document activity", "run: td="+td);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //获取Msg对象  用于返回主线程
-        Message msg=handler.obtainMessage();
-        msg.what=1;//--设置信标
-        //Message msg=handler.obtainMessage(1);
-        //msg.obj="this message from run()  what=1";
-        msg.obj=bundle;
-        handler.sendMessage(msg);//--放回msg堆栈中
-
-
-
+        return bundle;
     }
 
     private  String inputStream2String(InputStream inputStream) throws IOException {

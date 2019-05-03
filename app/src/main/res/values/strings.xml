@@ -7,9 +7,9 @@
 
 
     <string name="tname" translatable="false">TeamA</string>
-    <string name="tsc"  translatable="false">0</string>
-    <string name="tnameb"  translatable="false">TeamB</string>
-    <string name="tscb"  translatable="false">0</string>
+    <string name="tsc" translatable="false">0</string>
+    <string name="tnameb" translatable="false">TeamB</string>
+    <string name="tscb" translatable="false">0</string>
 
     <string name="j3" translatable="false">+3 POINTS</string>
     <string name="j2" translatable="false">+2 POINTS</string>

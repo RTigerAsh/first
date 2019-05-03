@@ -44,6 +44,30 @@ public class basketball extends AppCompatActivity {
         btos.setOnClickListener(listener);//给页面转换按钮设置标记
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        String tsc =((TextView) findViewById(R.id.tsc)).getText().toString();
+        String tscb =((TextView) findViewById(R.id.tscb)).getText().toString();
+
+        outState.putString("teama_score",tsc);
+        outState.putString("teamb_score",tscb);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        String tsc=savedInstanceState.getString("teama_score");
+        String tscb=savedInstanceState.getString("teamb_score");
+
+        ((TextView) findViewById(R.id.tsc)).setText(tsc);
+        ((TextView) findViewById(R.id.tscb)).setText(tscb);
+
+
+    }
 
     public class MyListener implements View.OnClickListener {
         TextView tsc = (TextView) findViewById(R.id.tsc);
