@@ -99,7 +99,6 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         //判断时间
         if (!todaystr.equals(updateDate)) {
             //开启子线程
-
             Log.i("spdate  onCreat", "onCreate: 需要更新");
             Thread t=new Thread(this);
             t.start();
@@ -150,6 +149,9 @@ public class RateActivity extends AppCompatActivity implements Runnable{
         if(item.getItemId()==R.id.changerate){
             Intent intent =new Intent(RateActivity.this,ChangeRateActivity.class);
             startActivityForResult(intent,1);//切换页面到修改汇率
+        }else if (item.getItemId()==R.id.rateswitch){
+            Intent list =new Intent(RateActivity.this,MylistActivity.class);
+            startActivity(list);//切换页面到汇率列表
         }
         return super.onOptionsItemSelected(item);
     }

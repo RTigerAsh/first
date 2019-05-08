@@ -3,8 +3,7 @@
     <string name="text1" translatable="false">すべて終了しました</string>
     <string name="text2" translatable="false">赵梵宇</string>
 
-    <string name="switch1" translatable="false">233333333</string>
-
+    <string name="switch1" translatable="false">修改汇率</string>
 
     <string name="tname" translatable="false">TeamA</string>
     <string name="tsc" translatable="false">0</string>
@@ -36,4 +35,5 @@
     <string name="hint_editdollar" translatable="false">修改美元汇率</string>
     <string name="hint_editeuro" translatable="false">修改欧元汇率</string>
     <string name="hint_editcon" translatable="false">修改韩元汇率</string>
+    <string name="rateswitch2" translatable="false">汇率列表</string>
 </resources>
