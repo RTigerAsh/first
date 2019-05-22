@@ -150,7 +150,7 @@ public class RateActivity extends AppCompatActivity implements Runnable{
             Intent intent =new Intent(RateActivity.this,ChangeRateActivity.class);
             startActivityForResult(intent,1);//切换页面到修改汇率
         }else if (item.getItemId()==R.id.rateswitch){
-            Intent list =new Intent(RateActivity.this,MylistActivity.class);
+            Intent list =new Intent(RateActivity.this, RateListActivity.class);
             startActivity(list);//切换页面到汇率列表
         }
         return super.onOptionsItemSelected(item);

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context="cn.edu.swufe.first.MylistActivity"
+    >
+
+
+    <TextView
+        android:id="@+id/itemTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20sp"
+        tools:text="@string/clear" />
+
+    <TextView
+        android:id="@+id/itemDetail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@android:color/holo_green_light"
+        android:text="@string/euro"
+        android:textSize="15sp" />
+
+</LinearLayout>
