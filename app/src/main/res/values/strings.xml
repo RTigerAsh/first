@@ -36,4 +36,8 @@
     <string name="hint_editeuro" translatable="false">修改欧元汇率</string>
     <string name="hint_editcon" translatable="false">修改韩元汇率</string>
     <string name="rateswitch2" translatable="false">汇率列表</string>
+
+    <string name="rdo_home_label">首页</string>
+    <string name="rdo_func_label">功能</string>
+    <string name="rdo_setting_label">设置</string>
 </resources>
